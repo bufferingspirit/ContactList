@@ -5,5 +5,5 @@ package com.example.admin.contactlist.util;
  */
 
 public class CONSTANTS {
-
+    public static final String BASE_URL = "https://randomuser.me/";
 }
