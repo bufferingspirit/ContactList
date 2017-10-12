@@ -6,6 +6,8 @@ import com.example.admin.contactlist.model.Contact;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.util.ArrayList;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -54,11 +56,21 @@ public class DataHelper {
     }
 
     public void GetContactCache(){
+        ArrayList<Contact> contacts = new ArrayList<>();
 
+        presenter.LoadContactCache(contacts);
     }
 
     public void SaveContact(){
-
+        //TODO cache full image
+        //TODO cache thumbnail
     }
 
+    public void GetThumbnail(){};
+
+    public void GetLargeImage(){};
+
+    private boolean contact_is_cached(){
+        return false;
+    };
 }
