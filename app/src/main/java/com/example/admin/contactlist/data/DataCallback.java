@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public interface DataCallback {
-    void LoadContactNetwork(Contact contact);
-    void LoadContactCache(ArrayList<Contact> contact);
+    void ParseContactNetwork(Contact contact);
+    void ParseContactCache(ArrayList<Contact> contact);
     void dataError(String s);
 }

@@ -39,7 +39,7 @@ public class DataHelper {
 
                        @Override
                        public void onNext(@NonNull Contact contact) {
-                           presenter.LoadContactNetwork(contact);
+                           presenter.ParseContactNetwork(contact);
                        }
 
                        @Override
@@ -58,10 +58,10 @@ public class DataHelper {
     public void GetContactCache(){
         ArrayList<Contact> contacts = new ArrayList<>();
 
-        presenter.LoadContactCache(contacts);
+        presenter.ParseContactCache(contacts);
     }
 
-    public void SaveContact(){
+    public void SaveContact(Contact contact){
         //TODO cache full image
         //TODO cache thumbnail
     }
