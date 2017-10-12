@@ -35,6 +35,7 @@ public class MainPresenter implements MainContract.MainPresenter, DataCallback{
     @Override
     public void ParseContactNetwork(Contact contact) {
         this.contact = contact;
+        System.out.println("API CALL: " + contact.getResults().get(0).getName().getFirst());
         view.UpdateView(contact);
     }
 

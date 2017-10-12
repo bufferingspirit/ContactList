@@ -1,6 +1,5 @@
 package com.example.admin.contactlist.inject.ContactInject;
 
-import com.example.admin.contactlist.model.Contact;
 import com.example.admin.contactlist.view.ContactView.ContactActivity;
 
 import dagger.Component;

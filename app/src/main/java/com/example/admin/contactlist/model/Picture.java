@@ -16,6 +16,16 @@ public class Picture {
     @Expose
     private String thumbnail;
 
+    private Images images;
+
+    public Images getImages() {
+        return images;
+    }
+
+    public void setImages(Images images) {
+        this.images = images;
+    }
+
     public String getLarge() {
         return large;
     }

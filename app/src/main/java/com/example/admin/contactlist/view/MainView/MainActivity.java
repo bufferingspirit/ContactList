@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         //TODO add model helper
         Result result = contact.getResults().get(0);
         String name = result.getName().getFirst() + " " + result.getName().getLast();
+        System.out.println("API CALL: " + name);
         tvName.setText(name);
         String address = result.getLocation().getStreet()
                 + " " + result.getLocation().getCity()
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
                 + " " + result.getLocation().getPostcode();
         tvAddress.setText(address);
         tvEmail.setText(result.getEmail());
-        //this is much easier and cleaner than the alternatives
+        //TODO fix this
         Picasso.with(this).load(result.getPicture().getThumbnail()).into(ivPicture);
     }
 
@@ -103,5 +104,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         //TODO need to make model parcelable
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.removeView();
     }
 }

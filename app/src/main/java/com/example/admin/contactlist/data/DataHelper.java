@@ -1,16 +1,16 @@
 package com.example.admin.contactlist.data;
 
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.example.admin.contactlist.model.Contact;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -23,6 +23,7 @@ public class DataHelper {
     DataCallback presenter;
     ContactAPIHelper service;
     public DataHelper(DataCallback presenter){
+        service = new ContactAPIHelper();
         this.presenter = presenter;
     };
 
@@ -39,6 +40,7 @@ public class DataHelper {
 
                        @Override
                        public void onNext(@NonNull Contact contact) {
+                           System.out.println("API CALL: " + contact.getResults().get(0).getName().getTitle());
                            presenter.ParseContactNetwork(contact);
                        }
 
@@ -56,7 +58,7 @@ public class DataHelper {
     }
 
     public void GetContactCache(){
-        ArrayList<Contact> contacts = new ArrayList<>();
+        ArrayList<Contact> contacts = null;
 
         presenter.ParseContactCache(contacts);
     }
