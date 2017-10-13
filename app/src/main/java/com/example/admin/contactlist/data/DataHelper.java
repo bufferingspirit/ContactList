@@ -1,10 +1,13 @@
 package com.example.admin.contactlist.data;
 
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.example.admin.contactlist.model.Contact;
+import com.example.admin.contactlist.model.Contact.Contact;
+import com.example.admin.contactlist.model.Contact.Result;
+import com.example.admin.contactlist.model.StoredContact.StoredContact;
 
 
 import java.util.ArrayList;
@@ -21,11 +24,13 @@ import io.reactivex.schedulers.Schedulers;
 public class DataHelper {
 
     DataCallback presenter;
-    ContactAPIHelper service;
-    public DataHelper(DataCallback presenter){
-        service = new ContactAPIHelper();
+    APIHelper service;
+    DatabaseHelper db;
+    public DataHelper(DataCallback presenter, Context context){
+        service = new APIHelper();
+        db = new DatabaseHelper(context);
         this.presenter = presenter;
-    };
+    }
 
     public void GetNetworkContact(){
         service.getContactApi()
@@ -58,21 +63,24 @@ public class DataHelper {
     }
 
     public void GetContactCache(){
-        ArrayList<Contact> contacts = null;
-
+        ArrayList<StoredContact> contacts = db.GetContactList();
         presenter.ParseContactCache(contacts);
     }
 
     public void SaveContact(Contact contact){
-        //TODO cache full image
-        //TODO cache thumbnail
+        Result result = contact.getResults().get(0);
+        StoredContact foo = new StoredContact();
+        //TODO Cache Thumbnail
+        //TODO Cache Large
+
+        foo.setFirstName(result.getName().getFirst());
+        foo.setLastName(result.getName().getLast());
+        foo.setEmail(result.getEmail());
+        foo.setStreet(result.getLocation().getStreet());
+        foo.setCity(result.getLocation().getCity());
+        foo.setState(result.getLocation().getState());
+        foo.setPostcode(result.getLocation().getPostcode().toString());
+        db.SaveNewContact(foo);
     }
 
-    public void GetThumbnail(){};
-
-    public void GetLargeImage(){};
-
-    private boolean contact_is_cached(){
-        return false;
-    };
 }

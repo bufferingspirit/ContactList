@@ -1,8 +1,10 @@
 package com.example.admin.contactlist.view.ContactView;
 
+import android.content.Context;
+
 import com.example.admin.contactlist.BasePresenter;
 import com.example.admin.contactlist.BaseView;
-import com.example.admin.contactlist.model.Contact;
+import com.example.admin.contactlist.model.StoredContact.StoredContact;
 
 import java.util.ArrayList;
 
@@ -13,7 +15,8 @@ import java.util.ArrayList;
 public interface ContactContract {
 
     interface ContactView extends BaseView{
-        void UpdateView(ArrayList<Contact> c);
+        void UpdateView(ArrayList<StoredContact> c);
+        Context GetContext();
     }
 
     interface ContactPresenter extends BasePresenter<ContactContract.ContactView> {

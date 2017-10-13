@@ -1,5 +1,6 @@
 package com.example.admin.contactlist.view.MainView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -13,8 +14,8 @@ import android.widget.Toast;
 
 import com.example.admin.contactlist.R;
 import com.example.admin.contactlist.inject.MainInject.DaggerMainComponent;
-import com.example.admin.contactlist.model.Contact;
-import com.example.admin.contactlist.model.Result;
+import com.example.admin.contactlist.model.Contact.Contact;
+import com.example.admin.contactlist.model.Contact.Result;
 import com.example.admin.contactlist.view.ContactView.ContactActivity;
 import com.squareup.picasso.Picasso;
 
@@ -110,5 +111,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     protected void onDestroy() {
         super.onDestroy();
         presenter.removeView();
+    }
+
+    public Context GetContext(){
+        return this;
     }
 }

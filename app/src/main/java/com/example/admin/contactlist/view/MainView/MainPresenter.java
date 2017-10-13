@@ -5,7 +5,8 @@ import android.util.Log;
 
 import com.example.admin.contactlist.data.DataCallback;
 import com.example.admin.contactlist.data.DataHelper;
-import com.example.admin.contactlist.model.Contact;
+import com.example.admin.contactlist.model.Contact.Contact;
+import com.example.admin.contactlist.model.StoredContact.StoredContact;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class MainPresenter implements MainContract.MainPresenter, DataCallback{
     @Override
     public void attachView(MainContract.MainView view) {
         this.view = view;
-        dataHelper = new DataHelper(this);
+        dataHelper = new DataHelper(this, view.GetContext());
         this.contact = null;
     }
 
@@ -40,7 +41,7 @@ public class MainPresenter implements MainContract.MainPresenter, DataCallback{
     }
 
     @Override
-    public void ParseContactCache(ArrayList<Contact> contact) {
+    public void ParseContactCache(ArrayList<StoredContact> contact) {
         Log.d(TAG, "ParseContactCache: " + "ERROR: Improper Callback");
     }
 

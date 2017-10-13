@@ -4,7 +4,8 @@ import android.util.Log;
 
 import com.example.admin.contactlist.data.DataCallback;
 import com.example.admin.contactlist.data.DataHelper;
-import com.example.admin.contactlist.model.Contact;
+import com.example.admin.contactlist.model.Contact.Contact;
+import com.example.admin.contactlist.model.StoredContact.StoredContact;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class ContactPresenter implements ContactContract.ContactPresenter, DataC
     @Override
     public void attachView(ContactContract.ContactView view) {
         this.view = view;
-        dataHelper = new DataHelper(this);
+        dataHelper = new DataHelper(this, view.GetContext());
     }
 
     @Override
@@ -37,7 +38,7 @@ public class ContactPresenter implements ContactContract.ContactPresenter, DataC
     }
 
     @Override
-    public void ParseContactCache(ArrayList<Contact> contacts) {
+    public void ParseContactCache(ArrayList<StoredContact> contacts) {
         view.UpdateView(contacts);
     }
 
@@ -48,6 +49,7 @@ public class ContactPresenter implements ContactContract.ContactPresenter, DataC
 
     @Override
     public void LoadContactList() {
+
         dataHelper.GetContactCache();
     }
 }

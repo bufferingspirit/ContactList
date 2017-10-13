@@ -24,8 +24,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //testing
     /*androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-                                        exclude group: 'com.android.support', module: 'support-annotations'
-                                    })*/
+                                                exclude group: 'com.android.support', module: 'support-annotations'
+                                            })*/
     testCompile 'junit:junit:4.12'
     //layouts
     compile 'com.android.support:recyclerview-v7:26.1.0'
@@ -39,13 +39,12 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    //local
-    compile 'org.greenrobot:greendao:3.2.0'
     //rxjava2
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //inject
     compile 'com.google.dagger:dagger:2.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
-
+    //local
+    compile 'com.google.android.gms:play-services-maps:11.0.4'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

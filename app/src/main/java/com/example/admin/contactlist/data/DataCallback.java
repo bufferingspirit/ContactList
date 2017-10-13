@@ -1,6 +1,7 @@
 package com.example.admin.contactlist.data;
 
-import com.example.admin.contactlist.model.Contact;
+import com.example.admin.contactlist.model.Contact.Contact;
+import com.example.admin.contactlist.model.StoredContact.StoredContact;
 
 import java.util.ArrayList;
 
@@ -10,6 +11,6 @@ import java.util.ArrayList;
 
 public interface DataCallback {
     void ParseContactNetwork(Contact contact);
-    void ParseContactCache(ArrayList<Contact> contact);
+    void ParseContactCache(ArrayList<StoredContact> contact);
     void dataError(String s);
 }

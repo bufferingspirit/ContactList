@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.contactlist.R;
-import com.example.admin.contactlist.model.Contact;
-import com.example.admin.contactlist.model.Result;
+import com.example.admin.contactlist.model.StoredContact.StoredContact;
+import com.example.admin.contactlist.util.BitmapUtil;
 
 import java.util.ArrayList;
 
@@ -26,12 +26,12 @@ import butterknife.ButterKnife;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
     private static final String TAG = "OptionsAdapter";
-    ArrayList<Contact> contactList;
+    ArrayList<StoredContact> contactList;
     Context context;
 
     private int lastPosition = -1;
 
-    public ContactAdapter(ArrayList<Contact> optionsList) {
+    public ContactAdapter(ArrayList<StoredContact> optionsList) {
         this.contactList = optionsList;
     }
 
@@ -44,14 +44,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Contact entry = contactList.get(position);
-        final Result result = entry.getResults().get(0);
+        final StoredContact entry = contactList.get(position);
 
-        holder.tvName.setText(result.getName().getFirst()
-                + " " + result.getName().getLast());
+        holder.tvName.setText(entry.getFirstName() + " " + entry.getLastName());
 
-        byte[] image = result.getPicture().getImages().getThumbnail();
-        holder.ivThumbnail.setImageBitmap(BitmapFactory.decodeByteArray(image, 0, image.length));
+        if(entry.getThumbnail() != null)
+        holder.ivThumbnail.setImageBitmap(BitmapUtil.getImage(entry.getThumbnail()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

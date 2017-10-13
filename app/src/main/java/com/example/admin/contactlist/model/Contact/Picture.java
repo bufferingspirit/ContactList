@@ -1,5 +1,5 @@
 
-package com.example.admin.contactlist.model;
+package com.example.admin.contactlist.model.Contact;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -15,16 +15,6 @@ public class Picture {
     @SerializedName("thumbnail")
     @Expose
     private String thumbnail;
-
-    private Images images;
-
-    public Images getImages() {
-        return images;
-    }
-
-    public void setImages(Images images) {
-        this.images = images;
-    }
 
     public String getLarge() {
         return large;

@@ -5,5 +5,6 @@ package com.example.admin.contactlist.util;
  */
 
 public class CONSTANTS {
-    public static final String BASE_URL = "https://randomuser.me/";
+    public static final String USER_URL = "https://randomuser.me/";
+    public static final String GOOGLE_KEY = "AIzaSyDxyfxJOJoCyedxEdhrZCMLg4qgKtkXJWs";
 }

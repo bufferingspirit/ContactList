@@ -1,5 +1,6 @@
 package com.example.admin.contactlist.view.ContactView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.admin.contactlist.R;
 import com.example.admin.contactlist.inject.ContactInject.DaggerContactComponent;
-import com.example.admin.contactlist.model.Contact;
+import com.example.admin.contactlist.model.StoredContact.StoredContact;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class ContactActivity extends AppCompatActivity implements ContactContrac
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.ItemAnimator itemAnimator;
 
-    ArrayList<Contact> c;
+    ArrayList<StoredContact> c;
     ContactAdapter adapter;
 
     @BindView(R.id.contactList)
@@ -72,8 +73,8 @@ public class ContactActivity extends AppCompatActivity implements ContactContrac
     }
 
     @Override
-    public void UpdateView(ArrayList<Contact> c) {
-        if(c == null){
+    public void UpdateView(ArrayList<StoredContact> c) {
+        if(c == null || c.size() == 0){
             setContentView(error_view);
         } else {
             this.c.clear();
@@ -81,6 +82,10 @@ public class ContactActivity extends AppCompatActivity implements ContactContrac
             adapter.notifyDataSetChanged();
         }
 
+    }
+
+    public Context GetContext(){
+        return this;
     }
 
     @Override

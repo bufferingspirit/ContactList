@@ -1,5 +1,5 @@
 
-package com.example.admin.contactlist.model;
+package com.example.admin.contactlist.model.Contact;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
