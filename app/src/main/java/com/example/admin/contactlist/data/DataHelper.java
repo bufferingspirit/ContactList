@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import com.example.admin.contactlist.model.Contact.Contact;
 import com.example.admin.contactlist.model.Contact.Result;
 import com.example.admin.contactlist.model.StoredContact.StoredContact;
+import com.example.admin.contactlist.util.BitmapUtil;
 
 
 import java.util.ArrayList;
@@ -68,10 +69,8 @@ public class DataHelper {
     }
 
     public void SaveContact(Contact contact){
-        Result result = contact.getResults().get(0);
-        StoredContact foo = new StoredContact();
-        //TODO Cache Thumbnail
-        //TODO Cache Large
+        final Result result = contact.getResults().get(0);
+        final StoredContact foo = new StoredContact();
 
         foo.setFirstName(result.getName().getFirst());
         foo.setLastName(result.getName().getLast());
@@ -80,7 +79,58 @@ public class DataHelper {
         foo.setCity(result.getLocation().getCity());
         foo.setState(result.getLocation().getState());
         foo.setPostcode(result.getLocation().getPostcode().toString());
-        db.SaveNewContact(foo);
+
+        //TODO Ugly
+        service.getImageObs(result.getPicture().getThumbnail())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Bitmap>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Bitmap value) {
+                        foo.setThumbnail(BitmapUtil.getBytes(value));
+                        service.getImageObs(result.getPicture().getLarge())
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Observer<Bitmap>() {
+                                    @Override
+                                    public void onSubscribe(Disposable d) {
+
+                                    }
+
+                                    @Override
+                                    public void onNext(Bitmap value) {
+                                        foo.setLarge(BitmapUtil.getBytes(value));
+                                        db.SaveNewContact(foo);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+
+                                    }
+
+                                    @Override
+                                    public void onComplete() {
+
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
 }

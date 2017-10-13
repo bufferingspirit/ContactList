@@ -43,7 +43,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final StoredContact entry = contactList.get(position);
 
         holder.tvName.setText(entry.getFirstName() + " " + entry.getLastName());
@@ -55,7 +55,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 //TODO add dialogue
-                Log.d(TAG, "onClick: " + " You clicked Me!");
+                Log.d(TAG, "onClick: " + entry.getFirstName() + " " + entry.getLastName());
+                ContactDialogue foo = new ContactDialogue(context, entry);
+                foo.show();
             }
         });
     }

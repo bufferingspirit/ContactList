@@ -51,7 +51,16 @@ public class APIHelper {
         @GET("api")
         Observable<Contact> getContactObservable();
 
+        /*@GET("api/{key}/{info_type}/{query_type}/q/{zip}.json")
+        Observable<Report> getWeatherObservable(@Path("key") String API_KEY,
+                                                @Path("info_type") String INFO_TYPE,
+                                                @Path("query_type") String QUERY_TYPE,
+                                                @Path("zip") String MY_ZIP
+        );*/
+
     }
+
+
 
     public Observable<Bitmap> getImageObs(final String URL){
         return Observable.create(new ObservableOnSubscribe<Bitmap>() {
