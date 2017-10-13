@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     }
 
     public void UpdateView(Contact contact){
-        //TODO add model helper
         Result result = contact.getResults().get(0);
         String name = result.getName().getFirst() + " " + result.getName().getLast();
         System.out.println("API CALL: " + name);

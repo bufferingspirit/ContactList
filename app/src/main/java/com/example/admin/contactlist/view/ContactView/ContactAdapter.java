@@ -54,7 +54,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO add dialogue
                 Log.d(TAG, "onClick: " + entry.getFirstName() + " " + entry.getLastName());
                 ContactDialogue foo = new ContactDialogue(context, entry);
                 foo.show();
