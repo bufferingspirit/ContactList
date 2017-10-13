@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
@@ -20,6 +22,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,8 +89,18 @@ public class ContactDialogue extends Dialog implements OnMapReadyCallback{
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        LatLng sydney = new LatLng(-34, 151);
-        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        Geocoder geocoder = new Geocoder(context);
+        List<Address> addressList = new ArrayList<>();
+        try {
+            addressList = geocoder.getFromLocationName(contact.getStreet() + ", "  +
+                    contact.getCity() + ", " +
+                    contact.getState() + ", " +
+                    contact.getPostcode(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LatLng sydney = new LatLng(addressList.get(0).getLatitude(),addressList.get(0).getLongitude() );
+        map.addMarker(new MarkerOptions().position(sydney).title(contact.getFirstName() + " " + contact.getLastName()));
         map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
